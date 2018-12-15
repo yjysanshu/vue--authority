@@ -1,5 +1,5 @@
 {
-  "name": "hrh-vue",
+  "name": "temp-vue",
   "version": "1.0.0",
   "description": "你的描述",
   "main": "index.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.yuanjy.com:yuanjiayang/hrh-vue.git"
+    "url": "git@github.com:yjysanshu/vue--authority.git"
   },
   "author": "yuanjy",
   "license": "ISC",

@@ -11,9 +11,11 @@ const system = {
     },
     // 配置项管理
     config: {
-        list: config => createAPI('/config/list', 'post', config),
-        save: config => createAPI('/config/save', 'post', config),
-        delete: config => createAPI('/config/del', 'post', config),
+        list: config => createAPI('/admin/configure/list', 'post', config),
+        save: config => createAPI('/admin/configure/save', 'post', config),
+        delete: config => createAPI('/admin/configure/del', 'post', config),
+
+        getParamValue: config => createAPI('/admin/configure/param-value', 'post', config)
     },
     // 菜单管理
     menu: {
