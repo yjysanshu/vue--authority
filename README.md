@@ -8,6 +8,8 @@
 > 需要和后端一起使用  
 后端github地址：https://github.com/yjysanshu/springboot-authority
 
+> 新创建的用户的密码是：czh123，重置之后的密码也是这个
+
 #### 开发调试
 1、安装项目依赖
 ```shell
