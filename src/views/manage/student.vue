@@ -184,7 +184,7 @@
                     this.formSubmiting = false;
                     this.$notify({
                         title: '错误',
-                        message: '保存失败',
+                        message: error,
                         type: 'error',
                         duration: 3000,
                     });
@@ -209,7 +209,7 @@
                         this.formSubmiting = false;
                         this.$notify({
                             title: '错误',
-                            message: '删除失败',
+                            message: error,
                             type: 'error',
                             duration: 3000,
                         });

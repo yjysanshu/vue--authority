@@ -14,7 +14,7 @@ const module = {
     student: {
         list: config => createAPI('/admin/student/list', 'post', config),
         save: config => createAPI('/admin/student/save', 'post', config),
-        del: config => createAPI('/admin/student/del', 'delete', config),
+        delete: config => createAPI('/admin/student/del', 'delete', config),
     }
 };
 

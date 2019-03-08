@@ -37,6 +37,14 @@ const system = {
         getResource: config => createAPI('/role/get-resource', 'post', config),
         saveResource: config => createAPI('/role/save-resource', 'post', config),
     },
+    //资源权限行为
+    action: {
+        getClasses: config => createAPI('/action/get-classes', 'get', config),
+        all: config => createAPI('/action/all', 'get', config),
+        getResources: config => createAPI('/action/get-resources', 'post', config),
+        batchSave: config => createAPI('/action/batch-save', 'post', config),
+        delete: config => createAPI('/action/delete', 'post', config),
+    },
     // 用户管理
     user: {
         list: config => createAPI('/user/list', 'post', config),

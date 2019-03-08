@@ -5,7 +5,7 @@
                 <div v-for="(sonMenu, sonIndex) in parentMenu.children" :key="sonIndex" class="panel-menu-item">
                     <span class="panel-menu-item-title">{{ sonMenu.title }}</span>
                     <el-checkbox-group v-model="checkedResourceIds">
-                        <el-checkbox v-for="resource in sonMenu.children" :label="resource.id" :key="resource.id">{{resource.uri}}</el-checkbox>
+                        <el-checkbox v-for="resource in sonMenu.children" :label="resource.id" :key="resource.id">{{resource.url}}</el-checkbox>
                     </el-checkbox-group>
                 </div>
             </el-tab-pane>
@@ -58,8 +58,8 @@ export default {
             this.formResourceSubmiting = true;
             this.$api.system.role.savePrivilege({
                 data: {
-                    id: this.roleId,
-                    type: 2,    // 资源类型 2-菜单
+                    roleId: this.roleId,
+                    resourceType: 1,    // 资源类型 1-接口
                     resourceIds: this.checkedResourceIds,
                 }
             }).then(response => {

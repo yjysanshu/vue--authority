@@ -14,7 +14,7 @@
                     </div>
                     <div class="list-item" v-for="(resource, index) in sonItem.children" :key="index">
                         <el-tag type="gray">
-                            {{ resource.uri }}
+                            {{ resource.url }}
                         </el-tag>
                         <span class="item-content">{{ resource.description }}</span>
                         <el-button size="mini" class="pull-right" style="margin-left: 10px;" @click="deleteRecord(resource)" type="primary" icon="delete"><i class="el-icon-delete"></i></el-button>
@@ -27,13 +27,13 @@
         <el-dialog :title="formTitle" :visible.sync="formVisible">
             <el-form label-position="left" label-width="70px" style="width: 80%; margin-left:0px;">
                 <el-form-item label="父菜单">
-                    <el-select v-model="createdItem.parent_id" clearable :disabled="true" placeholder="请选择父菜单">
+                    <el-select v-model="createdItem.parentId" clearable :disabled="true" placeholder="请选择父菜单">
                         <el-option v-for="item in menuIdOptions" :key="item.value" :label="item.label" :value="item.value">
                         </el-option>
                     </el-select>
                 </el-form-item>
                 <el-form-item label="资源URI">
-                    <el-input v-model="createdItem.uri" placeholder="请填写URI"></el-input>
+                    <el-input v-model="createdItem.url" placeholder="请填写URI"></el-input>
                 </el-form-item>
                 <el-form-item label="资源说明">
                     <el-input v-model="createdItem.description" placeholder="请填写资源说明"></el-input>
@@ -48,7 +48,7 @@
         <el-dialog :title="batchFormTitle" :visible.sync="batchFormVisible" :before-close="handleClose">
             <el-form label-position="left" label-width="70px" style="width: 80%; margin-left:0px;">
                 <el-form-item label="父菜单">
-                    <el-select v-model="createdItem.parent_id" clearable :disabled="true" placeholder="请选择父菜单">
+                    <el-select v-model="createdItem.parentId" clearable :disabled="true" placeholder="请选择父菜单">
                         <el-option v-for="item in menuIdOptions" :key="item.value" :label="item.label" :value="item.value">
                         </el-option>
                     </el-select>
@@ -59,7 +59,7 @@
                         </el-option>
                     </el-select>
                 </el-form-item>
-                <el-tree :data="resList" ref="tree" show-checkbox node-key="uri" :default-expanded-keys="expandedKeys" :default-checked-keys="checkedKeys" :props="defaultProps">
+                <el-tree :data="resList" ref="tree" show-checkbox node-key="url" :default-expanded-keys="expandedKeys" :default-checked-keys="checkedKeys" :props="defaultProps">
                 </el-tree>
             </el-form>
             <div slot="footer" class="dialog-footer">
@@ -85,8 +85,8 @@ export default {
             formSubmiting: false,
             createdItem: {
                 id: null,
-                parent_id: null,
-                uri: null,
+                parentId: null,
+                url: null,
                 description: null,
             },
             deletedForm: {
@@ -141,7 +141,7 @@ export default {
 
             // 子菜单与URI资源关联
             resourceData.forEach(item => {
-                let index = menuData.map(ele => ele.id).indexOf(item.parent_id);
+                let index = menuData.map(ele => ele.id).indexOf(item.parentId);
 
                 if (index < 0) return;
                 if (menuData[index].children === undefined) {
@@ -151,9 +151,9 @@ export default {
             });
 
             // 父子菜单关联
-            let parentData = menuData.filter(item => item.parent_id == 0);
+            let parentData = menuData.filter(item => item.parentId == 0);
             menuData.forEach(item => {
-                let index = parentData.map(ele => ele.id).indexOf(item.parent_id);
+                let index = parentData.map(ele => ele.id).indexOf(item.parentId);
 
                 if (index < 0) return;
                 if (parentData[index].children === undefined) {
@@ -171,7 +171,7 @@ export default {
                     data: {
                         limit: 100,
                         current_page: 1,
-                        parent_id: null
+                        parentId: null
                     }
                 }).then(response => {
                     let data = response.data.data;
@@ -199,8 +199,8 @@ export default {
         clearDialog() {
             console.log(this.resList);
             this.createdItem.id = null;
-            this.createdItem.parent_id = null;
-            this.createdItem.uri = null;
+            this.createdItem.parentId = null;
+            this.createdItem.url = null;
             this.createdItem.description = null;
             this.controller = '';
             this.resList = [];
@@ -211,7 +211,7 @@ export default {
                 this.batchFormVisible = true;
                 this.clearDialog();
                 this.batchFormTitle = "新建URI资源";
-                this.createdItem.parent_id = element.id;
+                this.createdItem.parentId = element.id;
                 this.getAlreadyChecked(element);
             } else {
                 this.formVisible = true;
@@ -252,7 +252,7 @@ export default {
             this.batchFormSubmiting = true;
             this.$api.system.action.batchSave({
                 data: {
-                    'parent_id': this.createdItem.parent_id,
+                    'parentId': this.createdItem.parentId,
                     'resources': check,
                     'class_name': this.controller
                 }
@@ -281,7 +281,7 @@ export default {
             });
         },
         deleteRecord(resource) {
-            confirmBox(' uri资源 ' + resource.uri).then(() => {
+            confirmBox(' uri资源 ' + resource.url).then(() => {
                 this.deletedForm.id = resource.id;
                 this.$api.system.action.delete({
                     data: this.deletedForm
@@ -312,7 +312,7 @@ export default {
             }
             this.$api.system.action.getResources({
                 data: {
-                    class_name: className
+                    str: className
                 }
             }).then(response => {
                 this.methodsList = response.data.data;
@@ -320,8 +320,8 @@ export default {
                 for (let i in this.methodsList) {
                     if (this.methodsList.hasOwnProperty(i)) {
                         tmp.push({
-                            title: this.methodsList[i].uri + ' 【' + this.methodsList[i].desc + '】',
-                            uri: this.methodsList[i].uri
+                            title: this.methodsList[i].url + ' 【' + this.methodsList[i].desc + '】',
+                            url: this.methodsList[i].url
                         });
                     }
                 }
@@ -332,7 +332,7 @@ export default {
             let tmp = [];
             if (elem.hasOwnProperty('children') && elem.children.constructor === Array) {
                 for (let i = 0; i < elem.children.length; i++) {
-                    tmp.push(elem.children[i].uri);
+                    tmp.push(elem.children[i].url);
                 }
             }
             this.checkedKeys = tmp;
