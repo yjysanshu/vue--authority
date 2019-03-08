@@ -43,7 +43,7 @@ const system = {
         all: config => createAPI('/action/all', 'get', config),
         getResources: config => createAPI('/action/get-resources', 'post', config),
         batchSave: config => createAPI('/action/batch-save', 'post', config),
-        delete: config => createAPI('/action/delete', 'post', config),
+        delete: config => createAPI('/action/delete', 'delete', config),
     },
     // 用户管理
     user: {
