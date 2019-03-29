@@ -15,6 +15,11 @@ const module = {
         list: config => createAPI('/admin/student/list', 'post', config),
         save: config => createAPI('/admin/student/save', 'post', config),
         delete: config => createAPI('/admin/student/del', 'delete', config),
+    },
+
+    //图表数据示例
+    chart: {
+        example: config => createAPI('/admin/chart/example', 'post', config)
     }
 };
 

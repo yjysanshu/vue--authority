@@ -19,12 +19,13 @@ export default {
             type: Object,
             default: ()=>({
                 title: null,
-                backgroundColor: '#6a7985',
-                legendData: null,
-                xAxisData: null,
-                seriesData: null,
-                yAxisData:null,
-                axisPointer:null
+                color: null,
+                tooltip: null,
+                legend: null,
+                toolbox: null,
+                xaxis: null,
+                dataZoom: null,
+                series:null
             }),
         }
 
@@ -35,7 +36,7 @@ export default {
         };
     },
     mounted() {
-        this.initChart();
+        //this.initChart();
     },
     beforeDestroy() {
         this.destroyChart();
@@ -49,40 +50,20 @@ export default {
     methods: {
         initChart() {
             this.chart = echarts.init(this.$refs.myEchart);
+            console.log(this.chartConfig)
             this.chart.setOption({
-                title: {
-                    text: this.chartConfig.title
-                },
-                tooltip:{
-                    trigger: 'axis',
-                    axisPointer: this.chartConfig.axisPointer ? this.chartConfig.axisPointer : {type:'cross'} ,
-                } ,
-                legend: {
-                    data: this.chartConfig.legendData,
-                },
-                toolbox: {
-                    show: true,
-                    feature: {
-                        dataView: { show: true, readOnly: false },
-                        magicType: { show: true, type: ['line', 'bar'] },
-                        restore: { show: true },
-                        saveAsImage: { show: true }
-                    }
-                },
-                xAxis: [
-                    {
-                        type: 'category',
-                        boundaryGap: false,
-                        data: this.chartConfig.xAxisData,
-                    }
-                ],
-                //y轴的处理 ，对应多y轴 或者无y轴的情况
-                yAxis: this.chartConfig.yAxisData && this.chartConfig.yAxisData.length != 0 ? this.chartConfig.yAxisData : [
-                    {
-                        type:'value'
-                    }
-                ],
-                series: this.chartConfig.seriesData,
+                title: this.chartConfig.title,
+                color: this.chartConfig.color,
+                tooltip: this.chartConfig.tooltip,
+                legend: this.chartConfig.legend,
+                toolbox: this.chartConfig.toolbox,
+                calculable: true,
+                xAxis: this.chartConfig.xaxis,
+                yAxis: [{
+                    type: 'value'
+                }],
+                dataZoom: this.chartConfig.dataZoom,
+                series: this.chartConfig.series
             })
         },
         destroyChart() {

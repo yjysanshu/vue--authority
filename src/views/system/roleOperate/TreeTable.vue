@@ -31,7 +31,7 @@
                 <el-button v-if="scope.row.level" size="small" @click="emitRoleManage(scope.row.id, 'menu')" type="warning" icon="setting">菜单</el-button>
                 <el-button v-if="scope.row.level" size="small" @click="emitRoleManage(scope.row.id, 'resource')" type="success" icon="setting">资源</el-button>
                 <el-button size="small" @click="emitRoleManage(scope.row.id, 'user')" type="info" icon="setting">用户</el-button>
-                <el-button size="small" @click="emitRoleUpdate(scope.row)" type="primary" icon="edit">修改</el-button>
+                <el-button v-if="scope.row.level" size="small" @click="emitRoleUpdate(scope.row)" type="primary" icon="edit">修改</el-button>
                 <el-button v-if="scope.row.level" size="small" @click="emitRoleDelete(scope.row.id)" type="danger" icon="delete">删除</el-button>
                 <el-button v-if="scope.row.type" size="small" @click="emitRoleCreate(scope.row.id)" type="success" icon="plus">角色</el-button>
             </template>

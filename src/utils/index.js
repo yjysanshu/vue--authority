@@ -317,3 +317,13 @@ export function debounce(func, wait, immediate) {
         return result;
     };
 }
+
+/**
+ * 获取 days 天以前的天数
+ * @param {*} days 
+ */
+export function getDayAgo(days) {
+    let date = new Date()
+    date.setTime(date.getTime() - (24 * 60 * 60 * 1000 * days))
+    return formatTime(date, 'yyyy-MM-dd')
+}
