@@ -51,7 +51,7 @@ export default {
           this.getChartConfig()
         },
         handleReset() {
-            this.getChartConfig()
+          this.getChartConfig()
         }
     }
 }

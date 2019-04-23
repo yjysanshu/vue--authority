@@ -4,7 +4,6 @@
             <Sidebar class="sidebar-container"></Sidebar>
         </div>
         <div class="main-container">
-            <Navbar2></Navbar2>
             <Navbar></Navbar>
             <App-main></App-main>
         </div>
@@ -12,12 +11,11 @@
 </template>
 
 <script>
-import { Navbar2, Navbar, Sidebar, AppMain } from 'views/layout';
+import { Navbar, Sidebar, AppMain } from 'views/layout';
 
 export default {
     name: 'layout',
     components: {
-        Navbar2,
         Navbar,
         Sidebar,
         AppMain

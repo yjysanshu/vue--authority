@@ -3,6 +3,26 @@
         <levelbar></levelbar>
         <tabs-view></tabs-view>
         <error-log v-if="log.length > 0" class="errLog-container" :logsList="log"></error-log>
+        <hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened"></hamburger>
+        <screenfull class='screenfull'></screenfull>
+        <el-dropdown class="avatar-container" trigger="click">
+            <div class="avatar-wrapper">
+                <img class="user-avatar" :src="(avatar != '' ? avatar : defaultAvatar) + '?imageView2/1/w/80/h/80'">
+                <span class="user-name"> {{ name }} </span>
+                <i class="el-icon-caret-bottom"></i>
+            </div>
+            <el-dropdown-menu class="user-dropdown" slot="dropdown">
+                <el-dropdown-item>
+                    <router-link class='inlineBlock' to="/">首页</router-link>
+                </el-dropdown-item>
+                <el-dropdown-item divided>
+                    <span @click="changePwd" style="display:block;">修改密码</span>
+                </el-dropdown-item>
+                <el-dropdown-item divided>
+                    <span @click="logout" style="display:block;">退出登录</span>
+                </el-dropdown-item>
+            </el-dropdown-menu>
+        </el-dropdown>
     </el-menu>
 </template>
 
