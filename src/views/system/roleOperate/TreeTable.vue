@@ -1,5 +1,5 @@
 <template>
-    <el-table :data="tableData" v-loading.body="tableLoading" element-loading-text="拼命加载中" border fit highlight-current-row>
+    <el-table :data="tableData" v-loading.body="tableLoading" element-loading-text="拼命加载中" border fit highlight-current-row row-key="id">
         <el-table-column label="角色名称" align="left">
             <template slot-scope="scope">
                 <span class="tree-indent" v-for="index in scope.row.level" :key="index"></span>
