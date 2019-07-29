@@ -45,9 +45,9 @@ export default {
                 data: {
                     id: this.roleId,
                 }
-            }).then(response => {
-                this.resourceData = response.data.data.list;
-                this.checkedResourceIds = response.data.data.checked.map(item => parseInt(item));
+            }).then(res => {
+                this.resourceData = res.data.list;
+                this.checkedResourceIds = res.data.checked.map(item => parseInt(item));
                 this.resourceLoading = false;
             }).catch(error => {
                 this.resourceLoading = false;

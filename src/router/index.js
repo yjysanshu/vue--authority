@@ -66,27 +66,27 @@ const router = new Router({
     routes: constantRouterMap
 });
 
-// 开始Progress
-router.beforeEach((to, from, next) => {
-    NProgress.start();
-    let xToken = localStorage.getItem('x-token');
+// // 开始Progress
+// router.beforeEach((to, from, next) => {
+//     NProgress.start();
+//     let xToken = localStorage.getItem('x-token');
 
-    if (to.path == '/auth/callback') {
-        next();
-    } else if (to.path == '/login' && xToken) {
-        next({ path: '/' });
-    } else if (to.path == '/login') {
-        next();
-    } else if (xToken == null) {
-        next({ path: '/login' });
-    } else {
-        next();
-    }
-});
+//     if (to.path == '/auth/callback') {
+//         next();
+//     } else if (to.path == '/login' && xToken) {
+//         next({ path: '/' });
+//     } else if (to.path == '/login') {
+//         next();
+//     } else if (xToken == null) {
+//         next({ path: '/login' });
+//     } else {
+//         next();
+//     }
+// });
 
-// 结束Progress
-router.afterEach(() => {
-    NProgress.done();
-});
+// // 结束Progress
+// router.afterEach(() => {
+//     NProgress.done();
+// });
 
 export default router;

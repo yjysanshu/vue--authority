@@ -118,8 +118,8 @@ export default {
             this.tableLoading = true;
             this.$api.system.role.list({
                 data: this.tableQuery
-            }).then(response => {
-                this.tableData = response.data.data;
+            }).then(res => {
+                this.tableData = res.data;
                 this.tableLoading = false;
             }).catch(error => {
                 this.tableLoading = false;

@@ -97,7 +97,7 @@ export default {
                         data: this.changeForm
                     }).then(response => {
                         this.loading = false;
-                        if (response.data.code == 0) {
+                        if (response.data.code == 200) {
                             this.$message.success('成功修改密码，请重新登录');
                             localStorage.clear();
                             this.redirectUrl = 'login';

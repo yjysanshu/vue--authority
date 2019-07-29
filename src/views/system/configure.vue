@@ -108,9 +108,9 @@ export default {
             this.tableLoading = true;
             this.$api.system.config.list({
                 data: this.tableQuery
-            }).then(response => {
-                this.total = response.data.data.total;
-                this.tableData = response.data.data.list;
+            }).then(res => {
+                this.total = res.data.total;
+                this.tableData = res.data.list;
                 this.tableLoading = false;
             }).catch(error => {
                 this.tableLoading = false;

@@ -95,8 +95,8 @@ export default {
         getList(parentId = 0) {
             this.$api.system.menu.list({
                 data: this.tableQuery
-            }).then(response => {
-                let data = response.data.data;
+            }).then(res => {
+                let data = res.data;
 
                 let changeData = data.filter(item => item.parentId == parentId);
                 data.forEach(item => {
@@ -120,10 +120,9 @@ export default {
             });
         },
         getMenuIds() {
-            this.$api.system.menu.map({
-
-            }).then(response => {
-                let data = response.data.data;
+            this.$api.system.menu.map({}).then(res => {
+                let data = res.data
+                console.log(data)
                 let list = Object.keys(data).map(key => ({ label: data[key].title, value: data[key].id }));
                 let init = { label: '无', value: 0 };
                 this.fatherMenuOptions = [init, ...list];

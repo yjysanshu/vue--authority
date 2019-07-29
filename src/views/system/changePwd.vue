@@ -81,16 +81,16 @@ export default {
                     this.loading = true;
                     this.$api.system.basic.changePwd({
                         data: this.changeForm
-                    }).then(response => {
+                    }).then(res => {
                         this.loading = false;
-                        if (response.data.code == 0) {
+                        if (res.code == 200) {
                             this.$message.success('成功修改密码，请重新登录');
-                            if (response.data.data > 0) {
+                            if (res.data > 0) {
                                 localStorage.clear();
                             }
                             this.redirectUrl = 'login';
                         } else {
-                            this.$message.warning(response.data.message);
+                            this.$message.warning(res.message);
                         }
                     }).catch(error => {
                         this.$message.error(error);

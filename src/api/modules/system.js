@@ -1,4 +1,4 @@
-import createAPI from '../axios'
+import createAPI from '@/utils/request'
 
 // 系统管理相关 API
 const system = {

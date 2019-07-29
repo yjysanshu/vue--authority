@@ -55,12 +55,12 @@ const permission = {
         GenerateRoutes({ commit }) {
             return new Promise((resolve, reject) => {
                 SystemApi.system.basic.userMenu({
-                }).then(response => {
+                }).then(res => {
                     // 如果用户未登陆，直接返回不生成路由表
-                    if (response.data.code == 101003) {
+                    if (res.code == 101003) {
                         resolve();
                     }
-                    var accessedRouters = response.data.data;
+                    var accessedRouters = res.data;
                     accessedRouters = filterAsyncRouter(accessedRouters).concat(asyncRouterMap);
                     commit('SET_ROUTERS', accessedRouters);
                     resolve();

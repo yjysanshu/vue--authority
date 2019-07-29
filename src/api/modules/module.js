@@ -1,4 +1,4 @@
-import createAPI from '../axios'
+import createAPI from '@/utils/request'
 
 // 其他管理 API
 const module = {

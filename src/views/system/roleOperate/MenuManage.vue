@@ -39,10 +39,10 @@ export default {
                 data: {
                     id: this.roleId,
                 }
-            }).then(response => {
-                this.checkedKeys = response.data.data.checkedKeys;
-                this.expandedKeys = response.data.data.expandedKeys;
-                this.menuData = response.data.data.list;
+            }).then(res => {
+                this.checkedKeys = res.data.checkedKeys;
+                this.expandedKeys = res.data.expandedKeys;
+                this.menuData = res.data.list;
                 this.menuLoading = false;
             }).catch(error => {
                 this.menuLoading = false;

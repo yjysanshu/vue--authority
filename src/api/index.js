@@ -1,13 +1,9 @@
-import system from './modules/system';
-import mock from './modules/mock';
-import module from './modules/module';
-import {postRequest} from './modules/httpRequest';
+import system from './modules/system'
+import module from './modules/module'
 
 const api = {
     system: system,
-    mock: mock,
-    module: module,
-    postRequest: postRequest
+    module: module
 };
 
 export default api;

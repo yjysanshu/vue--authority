@@ -22,8 +22,9 @@
 </template>
 
 <script>
-import { isPhone } from 'utils/validate';
-import Vue from 'vue';
+import { isPhone } from 'utils/validate'
+import Vue from 'vue'
+import { setToken } from '@/utils/auth'
 
 export default {
     name: 'login',
@@ -59,85 +60,32 @@ export default {
         }
     },
     methods: {
-        /*handleLogin() {
-            this.$refs.loginForm.validate(valid => {
-                if (valid) {
-                    this.loading = true;
-                    this.$api.system.basic.userLogin({
-                        data: this.loginForm
-                    }).then(response => {
-                        this.loading = false;
-                        if (response.data.code == 0) {
-                            let token = response.data.data.token;
-                            // 跳转到 callback 页面处理
-                            this.$router.push({ path: '/auth/callback?token=' + token });
-                        } else {
-                            this.$message.warning(response.data.message);
-                        }
-                    }).catch(error => {
-                        this.$message.error(error);
-                        this.loading = false;
-                    });
-                } else {
-                    console.log('error submit!!');
-                    return false;
-                }
-            });
-        },*/
-        /*handleLogin() {
-            this.$refs.loginForm.validate(valid => {
-                if (valid) {
-                    this.loading = true;
-                    this.$api.postRequest('/user/login', {
-                        email: this.loginForm.email,
-                        password: this.loginForm.password
-                    }).then(response => {
-                        this.loading = false;
-                        this.$message.warning("123456");
-                        console.log(response);
-                        if (response.code == 0) {
-                            let token = response.message;
-                            // 跳转到 callback 页面处理
-                            this.$router.push({ path: '/dashboard?token=' + token });
-                        } else {
-                            this.$message.warning(response.message);
-                        }
-                    }).catch(error => {
-                        this.$message.error(error);
-                        this.loading = false;
-                    });
-                } else {
-                    console.log('error submit!!');
-                    return false;
-                }
-            });
-        },*/
         handleLogin() {
-            $.ajax({
-                "url": Vue.prototype.HOST_PROXY_ADMIN + "/user/login",
-                "method": "POST",
-                "contentType": "application/x-www-form-urlencoded",
-                "data": "phone=" + this.loginForm.phone + "&password=" + this.loginForm.password
-            }).done(response => {
-                this.loading = false;
-                if (response.code === 0) {
-                    console.log(response.data.token);
-                    this.$message.success('登录成功');
-                    localStorage.setItem('x-token', response.data.token);
-                    this.$router.push({path: '/'});
+            this.$api.system.basic.userLogin({
+                data: "phone=" + this.loginForm.phone + "&password=" + this.loginForm.password
+            }).then(res => {
+                this.loading = false
+                
+                if (res.code === 200) {
+                    console.log(res.data.token)
+                    this.$message.success('登录成功')
+                    setToken(res.data.token)
+                    this.$router.push({path: '/index'})
                 } else {
-                    if (typeof response.message != 'undefined') {
-                        this.$message.error(response.message);
-                    } else if (response.data != null) {
-                        this.$message.error(response.data.message);
+                    if (typeof res.message != 'undefined') {
+                        this.$message.error(res.message)
+                    } else if (res.data != null) {
+                        this.$message.error(res.data.message)
                     } else 
-                        this.$message.error('登录失败，账号或密码错误');
-                    this.$router.push({path: '/login'});
+                        this.$message.error('登录失败，账号或密码错误')
+
+                    this.$router.push({path: '/login'})
                 }
-            }).fail(error => {
+            }, error => {
                 this.loading = false;
                 this.$message.error('登录失败，网络异常');
-            });
+            })
+            
             this.$router.push({ path: '/test' });
         }
     }

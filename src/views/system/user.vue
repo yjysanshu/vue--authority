@@ -169,9 +169,9 @@ export default {
             this.tableLoading = true;
             this.$api.system.user.list({
                 data: this.tableQuery
-            }).then(response => {
-                this.total = response.data.data.total;
-                this.tableData = response.data.data.list;
+            }).then(res => {
+                this.total = res.data.total;
+                this.tableData = res.data.list;
                 this.tableLoading = false;
             }).catch(error => {
                 this.tableLoading = false;
@@ -181,8 +181,8 @@ export default {
         getRoleList() {
             this.$api.system.role.all({
                 data:{}
-            }).then(response => {
-                let data = response.data.data;
+            }).then(res => {
+                let data = res.data;
                 this.roleList = Object.keys(data).map(key => ({ value: data[key].id, label: data[key].name }));
                 // console.log(data);
                 console.log(this.roleList);

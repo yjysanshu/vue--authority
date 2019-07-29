@@ -120,7 +120,7 @@
         data() {
             return {
                 tableQuery: {
-                    databaseName: 'temp',
+                    databaseName: 'testing_test_db',
                 },
                 total: 0,
                 tableData: [],
@@ -143,6 +143,7 @@
                 },
                 generatorForm: {
                     actions: [],
+                    database: null,
                     tableName: null,
                     packageName: null,
                     deletePrefix: false,
@@ -163,9 +164,9 @@
                 this.tableLoading = true;
                 this.$api.module.gii.index({
                     data: this.tableQuery
-                }).then(response => {
-                    this.total = response.data.data.total;
-                    this.tableData = response.data.data.list;
+                }).then(res => {
+                    this.total = res.data.total;
+                    this.tableData = res.data.list;
                     this.tableLoading = false;
                 }).catch(error => {
                     this.tableLoading = false;
@@ -174,8 +175,8 @@
             },
             getDatabaseList() {
                 this.$api.module.gii.list({
-                }).then(response => {
-                    let data = response.data.data;
+                }).then(res => {
+                    let data = res.data;
                     this.databaseData = Object.keys(data).map(key => ({ value: data[key].database, label: data[key].database }));
                 }).catch(error => {
                     console.log(error);
@@ -183,9 +184,9 @@
             },
             getTableList(tableName) {
                 this.$api.module.gii.tableList({
-                    data: {"tableName": tableName}
-                }).then(response => {
-                    this.columnData = response.data.data.list;
+                    data: { "database": this.tableQuery.databaseName, "tableName": tableName }
+                }).then(res => {
+                    this.columnData = res.data.list;
                 }).catch(error => {
                     console.log(error);
                 });
@@ -194,7 +195,7 @@
                 this.getList();
             },
             handleReset() {
-                this.tableQuery.limit = 10;
+                this.tableQuery.limit = 100;
                 this.tableQuery.currentPage = 1;
                 this.tableQuery.name = null;
 
@@ -251,29 +252,7 @@
             },
             commitForm() {
                 this.formSubmiting = true;
-                this.$api.module.house.save({
-                    data: this.createdItem
-                }).then(response => {
-                    this.formSubmiting = false;
-                    this.formVisible = false;
-                    this.$notify({
-                        title: '成功',
-                        message: '保存成功',
-                        type: 'success',
-                        duration: 1500,
-                    });
-                    this.handleFilter();
-                    console.log(response);
-                }).catch(error => {
-                    this.formSubmiting = false;
-                    this.$notify({
-                        title: '错误',
-                        message: '保存失败',
-                        type: 'error',
-                        duration: 3000,
-                    });
-                    console.log(error);
-                });
+                
             },
             generatorCommitForm() {
                 let actions = [];
@@ -281,6 +260,7 @@
                     actions.push(item.value);
                 });
                 this.generatorForm.actions = actions;
+                this.generatorForm.database = this.tableQuery.databaseName
 
                 this.$api.module.gii.generator({
                     data: this.generatorForm

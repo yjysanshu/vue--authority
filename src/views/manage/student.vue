@@ -107,8 +107,8 @@
             let paramKeys = ['student_sex']
             this.$api.system.config.getParamValue({
               data: {'names': paramKeys}
-            }).then(response => {
-              this.studentSex = response.data.data.student_sex;
+            }).then(res => {
+              this.studentSex = res.data.student_sex;
             }).catch(error => {
               console.log(error);
             });
@@ -117,9 +117,9 @@
                 this.tableLoading = true;
                 this.$api.module.student.list({
                     data: this.tableQuery
-                }).then(response => {
-                    this.total = response.data.data.total;
-                    this.tableData = response.data.data.list;
+                }).then(res => {
+                    this.total = res.data.total;
+                    this.tableData = res.data.list;
                     this.tableLoading = false;
                 }).catch(error => {
                     this.tableLoading = false;

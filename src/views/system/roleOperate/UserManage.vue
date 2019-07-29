@@ -37,15 +37,15 @@ export default {
                 data: {
                     id: this.roleId,
                 }
-            }).then(response => {
-                var all = response.data.data.all;
+            }).then(res => {
+                var all = res.data.all;
                 for (var key in all) {
                     this.userData.push({
                         key: parseInt(all[key].userId),
                         label: all[key].userName,
                     });
                 }
-                var rightList = response.data.data.right;
+                var rightList = res.data.right;
                 for (var rightKey in rightList) {
                     this.userModel.push(parseInt(rightList[rightKey].userId));
                 }

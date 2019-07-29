@@ -1,9 +1,10 @@
-import SystemApi from '@/api';
+import SystemApi from '@/api'
+import { getToken } from '@/utils/auth'
 
 const user = {
     state: {
         email: '',
-        token: localStorage.getItem('x-token'),
+        token: getToken(),
         name: '',
         avatar: '',
         position: '',
@@ -29,14 +30,14 @@ const user = {
         GetUserInfo({ commit }) {
             return new Promise((resolve, reject) => {
                 SystemApi.system.basic.userInfo({
-                }).then(response => {
+                }).then(res => {
                     // 获取用户信息失败
-                    if (response.data.code != 0) {
-                        reject(response.data.message);
+                    if (res.code != 200) {
+                        reject(res.message);
                     }
 
-                    let userInfo = response.data.data;
-                    commit('SET_TOKEN', localStorage.getItem('x-token'));
+                    const userInfo = res.data;
+                    commit('SET_TOKEN', getToken());
                     commit('SET_EMAIL', userInfo.email);
                     commit('SET_NAME', userInfo.name);
                     commit('SET_AVATAR', userInfo.avatar);

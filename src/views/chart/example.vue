@@ -41,8 +41,8 @@ export default {
           this.tableQuery.end = this.datepicker[1]
           this.$api.module.chart.example({
               data: this.tableQuery
-          }).then(response => {
-              this.chartConfig = response.data.data
+          }).then(res => {
+              this.chartConfig = res.data
           }).catch(error => {
               console.log(error);
           });

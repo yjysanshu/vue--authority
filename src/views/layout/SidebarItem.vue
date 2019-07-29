@@ -30,6 +30,9 @@ export default {
         routes: {
             type: Array
         }
+    },
+    mounted() {
+        
     }
 }
 </script>

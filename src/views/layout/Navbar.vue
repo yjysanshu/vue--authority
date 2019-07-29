@@ -27,13 +27,15 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import Levelbar from './Levelbar';
-import TabsView from './TabsView';
-import Hamburger from 'components/Hamburger';
-import Screenfull from 'components/Screenfull';
-import ErrorLog from 'components/ErrLog';
-import errLogStore from 'store/errLog';
+import { mapGetters } from 'vuex'
+import Levelbar from './Levelbar'
+import TabsView from './TabsView'
+import Hamburger from 'components/Hamburger'
+import Screenfull from 'components/Screenfull'
+import ErrorLog from 'components/ErrLog'
+import errLogStore from 'store/errLog'
+import { removeToken } from '@/utils/auth'
+
 
 export default {
     components: {
@@ -63,8 +65,8 @@ export default {
             this.$store.dispatch('ToggleSideBar')
         },
         logout() {
-            localStorage.clear();
-            location.reload();
+            removeToken()
+            location.reload()
             // this.$store.dispatch('LogOut').then(() => {
             //     location.reload();// 为了重新实例化vue-router对象 避免bug
             // });

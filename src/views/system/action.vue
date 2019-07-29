@@ -127,9 +127,9 @@ export default {
     methods: {
         classList() {
             this.$api.system.action.getClasses({})
-                .then(resp => {
-                    this.classLists = resp.data.data;
-                });
+                .then(res => {
+                    this.classLists = res.data;
+                })
         },
         async dataInit() {
             let menuData = await this.getMenuList().catch(error => {
@@ -173,13 +173,13 @@ export default {
                         current_page: 1,
                         parentId: null
                     }
-                }).then(response => {
-                    let data = response.data.data;
+                }).then(res => {
+                    let data = res.data;
                     this.menuIdOptions = Object.keys(data).map(key => ({
                         label: data[key].title,
                         value: data[key].id
                     }));
-                    resolve(response.data.data);
+                    resolve(res.data);
                 }).catch(error => {
                     reject(error);
                 });
@@ -189,8 +189,8 @@ export default {
             return new Promise((resolve, reject) => {
                 this.$api.system.action.all({
 
-                }).then(response => {
-                    resolve(response.data.data);
+                }).then(res => {
+                    resolve(res.data);
                 }).catch(error => {
                     reject(error);
                 });
@@ -314,8 +314,8 @@ export default {
                 data: {
                     str: className
                 }
-            }).then(response => {
-                this.methodsList = response.data.data;
+            }).then(res => {
+                this.methodsList = res.data;
                 let tmp = [];
                 for (let i in this.methodsList) {
                     if (this.methodsList.hasOwnProperty(i)) {
