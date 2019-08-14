@@ -5,6 +5,8 @@
 账号密码为默认值
 
 ### 代码使用说明
+> 只作为学习demo，最好不要用来做上线的东西
+
 > 需要和后端一起使用  
 后端github地址：https://github.com/yjysanshu/springboot-authority
 
